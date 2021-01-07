@@ -1,7 +1,8 @@
 // Copyright 2014 Google Inc. All Rights Reserved.
+#import <Foundation/Foundation.h>
 
 /// Positions to place an ad.
-typedef NS_ENUM(NSUInteger, GADAdPosition) {
+typedef NS_ENUM(NSInteger, GADAdPosition) {
   kGADAdPositionCustom = -1,              ///< Custom ad position.
   kGADAdPositionTopOfScreen = 0,          ///< Top of screen.
   kGADAdPositionBottomOfScreen = 1,       ///< Bottom of screen.
@@ -43,11 +44,11 @@ typedef const void *GADUTypeRewardBasedVideoAdClientRef;
 /// Type representing a Unity rewarded ad client.
 typedef const void *GADUTypeRewardedAdClientRef;
 
-/// Type representing a Unity ad loader.
-typedef const void *GADUTypeAdLoaderClientRef;
+/// Type representing a GADURewardedInterstitialAd.
+typedef const void *GADUTypeRewardedInterstitialAdRef;
 
-/// Type representing a Unity native custom template ad.
-typedef const void *GADUTypeNativeCustomTemplateAdClientRef;
+/// Type representing a Unity rewarded interstitial ad client.
+typedef const void *GADUTypeRewardedInterstitialAdClientRef;
 
 /// Type representing a GADUBanner.
 typedef const void *GADUTypeBannerRef;
@@ -61,17 +62,17 @@ typedef const void *GADUTypeRewardBasedVideoAdRef;
 /// Type representing a GADURewardedAd.
 typedef const void *GADUTypeRewardedAdRef;
 
-/// Type representing a GADUAdLoader.
-typedef const void *GADUTypeAdLoaderRef;
-
-/// Type representing a GADUNativeCustomTemplateAd.
-typedef const void *GADUTypeNativeCustomTemplateAdRef;
-
 /// Type representing a GADURequest.
 typedef const void *GADUTypeRequestRef;
 
 /// Type representing a GADUTypeRequestConfigurationRef
 typedef const void *GADUTypeRequestConfigurationRef;
+
+/// Type representing a GADUTypeResponseInfoRef
+typedef const void *GADUTypeResponseInfoRef;
+
+/// Type representing a AdError type
+typedef const void *GADUTypeErrorRef;
 
 /// Type representing a NSMutableDictionary of extras.
 typedef const void *GADUTypeMutableDictionaryRef;
@@ -168,11 +169,6 @@ typedef void (*GADURewardBasedVideoAdWillLeaveApplicationCallback)(
 typedef void (*GADURewardBasedVideoAdDidCompleteCallback)(
     GADUTypeRewardBasedVideoAdClientRef *rewardBasedVideoClient);
 
-/// Callback for when a native custom template ad request was successfully loaded.
-typedef void (*GADUAdLoaderDidReceiveNativeCustomTemplateAdCallback)(
-    GADUTypeAdLoaderClientRef *adLoader, GADUTypeNativeCustomTemplateAdRef nativeCustomTemplateAd,
-    const char *templateID);
-
 /// Callback for when a rewarded ad request was successfully loaded.
 typedef void (*GADURewardedAdDidReceiveAdCallback)(GADUTypeRewardedAdClientRef *rewardedAdClient);
 
@@ -182,7 +178,7 @@ typedef void (*GADURewardedAdDidFailToReceiveAdWithErrorCallback)(
 
 /// Callback for when a rewarded ad failed to show.
 typedef void (*GADURewardedAdDidFailToShowAdWithErrorCallback)(
-    GADUTypeRewardedAdClientRef *rewardedAdClient, const char *error);
+    GADUTypeRewardedAdClientRef *rewardedAdClient, const GADUTypeErrorRef error);
 
 /// Callback for when a rewarded ad is opened.
 typedef void (*GADURewardedAdDidOpenCallback)(GADUTypeRewardedAdClientRef *rewardedAdClient);
@@ -199,10 +195,32 @@ typedef void (*GADURewardedAdPaidEventCallback)(GADUTypeRewardedAdClientRef *rew
                                                 int precision, int64_t value,
                                                 const char *currencyCode);
 
-/// Callback for when a native ad request failed.
-typedef void (*GADUAdLoaderDidFailToReceiveAdWithErrorCallback)(GADUTypeAdLoaderClientRef *adLoader,
-                                                                const char *error);
+/// Callback for when a rewarded interstitial ad is loaded.
+typedef void (*GADURewardedInterstitialAdLoadedCallback)(
+    GADUTypeRewardedInterstitialAdClientRef *rewardedInterstitialAdClient);
 
-/// Callback for when a native custom template ad is clicked.
-typedef void (*GADUNativeCustomTemplateDidReceiveClickCallback)(
-    GADUTypeNativeCustomTemplateAdClientRef *nativeCustomTemplateAd, const char *assetName);
+/// Callback for when a rewarded interstitial ad request failed to load.
+typedef void (*GADURewardedInterstitialAdFailedToLoadCallback)(
+    GADUTypeRewardedInterstitialAdClientRef *rewardedAdClient, const char *error);
+
+/// Callback for when a user earned a reward.
+typedef void (*GADUUserEarnedRewardCallback)(
+    GADUTypeRewardedInterstitialAdClientRef *rewardedInterstitialAdClient, const char *rewardType,
+    double rewardAmount);
+
+/// Callback for when a rewarded interstitial ad is estimated to have earned money.
+typedef void (*GADURewardedInterstitialAdPaidEventCallback)(
+    GADUTypeRewardedInterstitialAdClientRef *rewardedInterstitialAdClient, int precision,
+    int64_t value, const char *currencyCode);
+
+/// Callback when an ad failed to present full screen content.
+typedef void (*GADUFailedToPresentFullScreenContentCallback)(
+    GADUTypeRewardedInterstitialAdRef *rewardedInterstitialAdClient, const char *error);
+
+/// Callback when an ad presented full screen content.
+typedef void (*GADUDidPresentFullScreenContentCallback)(
+    GADUTypeRewardedInterstitialAdRef *rewardedInterstitialAdClient);
+
+/// Callback when an ad dismissed full screen content.
+typedef void (*GADUDidDismissFullScreenContentCallback)(
+    GADUTypeRewardedInterstitialAdRef *rewardedInterstitialAdClient);

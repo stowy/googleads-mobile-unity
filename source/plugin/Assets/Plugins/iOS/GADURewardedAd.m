@@ -46,9 +46,9 @@
              completionHandler:^(GADRequestError *_Nullable error) {
                if (error) {
                  if (self.adFailedToLoadCallback) {
-                   self.adFailedToLoadCallback(
-                       self.rewardedAdClient,
-                       [[error localizedFailureReason] cStringUsingEncoding:NSUTF8StringEncoding]);
+
+                   self.adFailedToLoadCallback(self.rewardedAdClient,
+                        (__bridge GADUTypeErrorRef)error);
                  }
                } else {
                  if (self.adReceivedCallback) {
@@ -75,6 +75,10 @@
   return self.rewardedAd.responseInfo.adNetworkClassName;
 }
 
+- (GADResponseInfo *)responseInfo {
+  return self.rewardedAd.responseInfo;
+}
+
 - (void)rewardedAd:(nonnull GADRewardedAd *)rewardedAd
     userDidEarnReward:(nonnull GADAdReward *)reward {
   if (self.didEarnRewardCallback) {
@@ -87,11 +91,9 @@
 }
 
 - (void)rewardedAd:(nonnull GADRewardedAd *)rewardedAd
-    didFailToPresentWithError:(nonnull NSError *)error {
+    didFailToPresentWithError:(nonnull GADRequestError *)error {
   if (self.adFailedToShowCallback) {
-    self.adFailedToShowCallback(
-        self.rewardedAdClient,
-        [[error localizedFailureReason] cStringUsingEncoding:NSUTF8StringEncoding]);
+    self.adFailedToShowCallback(self.rewardedAdClient, (__bridge GADUTypeErrorRef)error);
   }
 }
 
@@ -106,6 +108,12 @@
 }
 
 - (void)rewardedAdDidDismiss:(nonnull GADRewardedAd *)rewardedAd {
+  extern bool _didResignActive;
+  if(_didResignActive) {
+       // We are in the middle of the shutdown sequence, and at this point unity runtime is already destroyed.
+       // We shall not call unity API, and definitely not script callbacks, so nothing to do here
+    return;
+  }
   if (UnityIsPaused()) {
     UnityPause(NO);
   }

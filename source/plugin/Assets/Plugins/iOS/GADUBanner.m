@@ -192,6 +192,10 @@
   return self.bannerView.responseInfo.adNetworkClassName;
 }
 
+- (GADResponseInfo *)responseInfo {
+  return self.bannerView.responseInfo;
+}
+
 - (CGFloat)heightInPixels {
   return CGRectGetHeight(CGRectStandardize(self.bannerView.frame)) * [UIScreen mainScreen].scale;
 }
@@ -247,9 +251,7 @@
 
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error {
   if (self.adFailedCallback) {
-    NSString *errorMsg = [NSString
-        stringWithFormat:@"Failed to receive ad with error: %@", [error localizedFailureReason]];
-    self.adFailedCallback(self.bannerClient, [errorMsg cStringUsingEncoding:NSUTF8StringEncoding]);
+    self.adFailedCallback(self.bannerClient, (__bridge GADUTypeErrorRef)error);
   }
 }
 

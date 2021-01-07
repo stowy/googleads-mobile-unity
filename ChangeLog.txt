@@ -1,6 +1,80 @@
 Google Mobile Ads Unity Plugin Change Log
 
 **************
+Version 5.4.0
+**************
+
+Plugin:
+- Add support for iOS14 with Googles `SKAdNetwork` identifiers automatically included in
+  `Info.plist`.
+- Added the RewardedInterstitialAd format. This feature is currently in private beta. Reach out to your account manager to request access.
+- Added mock ad views to enable developers to test ad placement and callback logic within the Unity editor.
+- Added fix for crash that occurs when attempting to show interstitial when app is closing.
+- Added fix for crash that occurs when calling `GetResponseInfo()` on iOS before ad is loaded.
+
+Built and tested with:
+- Google Play services 19.5.0
+- Google Mobile Ads iOS SDK 7.68.0
+- External Dependency Manager for Unity 1.2.161.
+
+**************
+Version 5.3.0
+**************
+
+Plugin:
+- Add InitializationStatusClient for Init callback in Unity Editor. Fixes #1394.
+- Update to Android SDK version 19.3.0
+
+Built and tested with:
+- Google Play services 19.3.0
+- Google Mobile Ads iOS SDK 7.63.0
+- External Dependency Manager for Unity 1.2.156.
+
+**************
+Version 5.2.0
+**************
+
+Plugin:
+  - Added ResponseInfo class. See
+  https://developers.google.com/admob/unity/response-info for usage details.
+  - Fixes #1307 - issue with running in Unity Editor when targeting iOS platform.
+  - Fixes #1287 - issue where a crash is caused in equality check when AdSize is
+  null.
+  - Moved GoogleMobileAdsPlugin to GoogleMobileAdsPlugin.androidlib to ensure manifest
+  is picked up when building android app in Unity 2020. Fixes issue #1310. Thanks @pipe-alt!
+  - Fix error messages for iOS plugin.
+  - Added the DisableMediationInitialization() method to MobileAds.
+   Warning: Calling this method may negatively impact your Google mediation performance.
+   This method should only be called if you include Google mediation adapters in your app, but you
+    won't use mediate through Google during a particular app session (for example, you are running
+     an A/B mediation test).
+
+Built and tested with:
+- Google Play services 19.2.0
+- Google Mobile Ads iOS SDK 7.60.0
+- External Dependency Manager for Unity 1.2.156.
+
+**************
+Version 5.1.0
+**************
+
+Plugin:
+  - Added RequestConfiguration class. See
+  https://developers.google.com/admob/unity/targeting for usage details.
+  - Fixed issue with building for IL2CPP in versions of Unity 2017 and earlier.
+  - Adding missing imports for Unity 5.6 build (Thanks @EldersJavas !).
+  - Added GoogleMobileAds assembly definition.
+  - Added thread safety to GADUObjectCache in iOS plugin.
+  - Revised project structure. If upgrading from a previous version, delete
+  your GoogleMobileAds/ folder before importing this plugin.
+
+Built and tested with:
+- Google Play services 19.1.0
+- Google Mobile Ads iOS SDK 7.58.0
+- Unity Jar Resolver 1.2.152
+
+
+**************
 Version 5.0.1
 **************
 

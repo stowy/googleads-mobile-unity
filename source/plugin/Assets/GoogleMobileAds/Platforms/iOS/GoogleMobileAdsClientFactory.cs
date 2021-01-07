@@ -1,5 +1,5 @@
 #if UNITY_IOS
-// Copyright (C) 2020 Google, Inc.
+// Copyright (C) 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,44 +13,76 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.Scripting;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
 
-namespace GoogleMobileAds
-{
-    public class GoogleMobileAdsClientFactory
+namespace GoogleMobileAds {
+  [Preserve]
+  public class GoogleMobileAdsClientFactory : IClientFactory {
+    public IBannerClient BuildBannerClient()
     {
-        public static IBannerClient BuildBannerClient()
-        {
-            return new GoogleMobileAds.iOS.BannerClient();
-        }
-
-        public static IInterstitialClient BuildInterstitialClient()
-        {
-          return new GoogleMobileAds.iOS.InterstitialClient();
-        }
-
-        public static IRewardBasedVideoAdClient BuildRewardBasedVideoAdClient()
-        {
-          return new GoogleMobileAds.iOS.RewardBasedVideoAdClient();
-        }
-
-        public static IRewardedAdClient BuildRewardedAdClient()
-        {
-          return new GoogleMobileAds.iOS.RewardedAdClient();
-        }
-
-        public static IAdLoaderClient BuildAdLoaderClient(AdLoaderClientArgs args)
-        {
-          return new GoogleMobileAds.iOS.AdLoaderClient(args);
-        }
-
-        public static IMobileAdsClient MobileAdsInstance()
-        {
-          return GoogleMobileAds.iOS.MobileAdsClient.Instance;
-        }
+      if (Application.platform == RuntimePlatform.IPhonePlayer)
+      {
+        return new GoogleMobileAds.iOS.BannerClient();
+      }
+      throw new InvalidOperationException(@"Called " + MethodBase.GetCurrentMethod().Name +
+                                          " on non-iOS runtime");
     }
+
+    public IInterstitialClient BuildInterstitialClient()
+    {
+      if (Application.platform == RuntimePlatform.IPhonePlayer)
+      {
+        return new GoogleMobileAds.iOS.InterstitialClient();
+      }
+      throw new InvalidOperationException(@"Called " + MethodBase.GetCurrentMethod().Name +
+                                          " on non-iOS runtime");
+    }
+
+    public IRewardBasedVideoAdClient BuildRewardBasedVideoAdClient()
+    {
+      if (Application.platform == RuntimePlatform.IPhonePlayer)
+      {
+        return new GoogleMobileAds.iOS.RewardBasedVideoAdClient();
+      }
+      throw new InvalidOperationException(@"Called " + MethodBase.GetCurrentMethod().Name +
+                                          " on non-iOS runtime");
+    }
+
+    public IRewardedAdClient BuildRewardedAdClient()
+    {
+      if (Application.platform == RuntimePlatform.IPhonePlayer)
+      {
+        return new GoogleMobileAds.iOS.RewardedAdClient();
+      }
+      throw new InvalidOperationException(@"Called " + MethodBase.GetCurrentMethod().Name +
+                                          " on non-iOS runtime");
+    }
+
+    public IRewardedInterstitialAdClient BuildRewardedInterstitialAdClient()
+    {
+      if (Application.platform == RuntimePlatform.IPhonePlayer)
+      {
+        return new GoogleMobileAds.iOS.RewardedInterstitialAdClient();
+      }
+      throw new InvalidOperationException(@"Called " + MethodBase.GetCurrentMethod().Name +
+                                          " on non-iOS runtime");
+    }
+
+    public IMobileAdsClient MobileAdsInstance()
+    {
+      if (Application.platform == RuntimePlatform.IPhonePlayer)
+      {
+        return GoogleMobileAds.iOS.MobileAdsClient.Instance;
+      }
+      throw new InvalidOperationException(@"Called " + MethodBase.GetCurrentMethod().Name +
+                                          " on non-iOS runtime");
+    }
+  }
 }
 #endif

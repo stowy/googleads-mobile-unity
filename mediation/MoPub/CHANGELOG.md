@@ -1,5 +1,29 @@
 ## MoPub Unity Mediation Plugin Changelog
 
+#### Version 2.14.0
+- Supports [MoPub Android adapter version 5.15.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mopub/CHANGELOG.md#version-51500).
+- Supports [MoPub iOS adapter version 5.15.0.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MoPub/CHANGELOG.md#version-51500).
+
+#### Version 2.13.0
+- Supports [MoPub Android adapter version 5.14.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mopub/CHANGELOG.md#version-51400).
+- Supports [MoPub iOS adapter version 5.14.1.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MoPub/CHANGELOG.md#version-51410).
+
+#### Version 2.12.1
+- Supports [MoPub Android adapter version 5.13.1.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mopub/CHANGELOG.md#version-51310).
+- Supports [MoPub iOS adapter version 5.13.1.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MoPub/CHANGELOG.md#version-51310).
+
+#### Version 2.12.0
+- Supports [MoPub Android adapter version 5.13.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mopub/CHANGELOG.md#version-51300).
+- Supports [MoPub iOS adapter version 5.13.0.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MoPub/CHANGELOG.md#version-51300).
+
+#### Version 2.11.0
+- Supports [MoPub Android adapter version 5.12.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mopub/CHANGELOG.md#version-51200).
+- Supports [MoPub iOS adapter version 5.12.1.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MoPub/CHANGELOG.md#version-51210).
+
+#### Version 2.10.0
+- Supports [MoPub Android adapter version 5.11.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mopub/CHANGELOG.md#version-51100).
+- Supports [MoPub iOS adapter version 5.11.0.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MoPub/CHANGELOG.md#version-51100).
+
 #### Version 2.9.0
 - Supports [MoPub Android adapter version 5.10.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mopub/CHANGELOG.md#version-51000).
 - Supports [MoPub iOS adapter version 5.10.0.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MoPub/CHANGELOG.md#version-51000).

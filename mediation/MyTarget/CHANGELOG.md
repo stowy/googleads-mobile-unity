@@ -1,5 +1,46 @@
 ## myTarget Unity Mediation Plugin Changelog
 
+#### Version 3.8.1
+- Supports [myTarget Android adapter version 5.11.5.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-51150).
+- Supports [myTarget iOS adapter version 5.9.6.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5960).
+
+#### Version 3.8.0
+- Supports [myTarget Android adapter version 5.11.4.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-51140).
+- Supports [myTarget iOS adapter version 5.9.5.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5950).
+
+#### Version 3.7.0
+- Supports [myTarget Android adapter version 5.10.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-51000).
+- Supports [myTarget iOS adapter version 5.7.5.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5750).
+
+#### Version 3.6.1
+- Renamed the `MyTarget.IsUserConsent()` method to `MyTarget.IsConsent()`.
+- Supports [myTarget Android adapter version 5.9.1.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-5910).
+- Supports [myTarget iOS adapter version 5.7.2.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5720).
+
+#### Version 3.6.0
+- Supports [myTarget Android adapter version 5.9.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-5900).
+- Supports [myTarget iOS adapter version 5.7.0.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5700).
+
+#### Version 3.5.2
+- Supports [myTarget Android adapter version 5.8.3.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-5830).
+- Supports [myTarget iOS adapter version 5.6.3.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5630).
+
+#### Version 3.5.1
+- Supports [myTarget Android adapter version 5.8.2.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-5820).
+- Supports [myTarget iOS adapter version 5.6.1.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5610).
+
+#### Version 3.5.0
+- Supports [myTarget Android adapter version 5.8.1.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-5810).
+- Supports [myTarget iOS adapter version 5.6.0.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5600).
+
+#### Version 3.4.0
+- Supports [myTarget Android adapter version 5.8.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-5800).
+- Supports [myTarget iOS adapter version 5.5.2.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5520).
+
+#### Version 3.3.0
+- Supports [myTarget Android adapter version 5.7.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-5700).
+- Supports [myTarget iOS adapter version 5.5.1.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5510).
+
 #### Version 3.2.0
 - Supports [myTarget Android adapter version 5.6.3.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/mytarget/CHANGELOG.md#version-5630).
 - Supports [myTarget iOS adapter version 5.4.9.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/MyTarget/CHANGELOG.md#version-5490).

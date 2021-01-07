@@ -21,7 +21,12 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdValue;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.OnPaidEventListener;
+import com.google.android.gms.ads.ResponseInfo;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /**
  * Native interstitial implementation for the Google Mobile Ads Unity plugin.
@@ -84,16 +89,14 @@ public class Interstitial {
                             }
 
                             @Override
-                            public void onAdFailedToLoad(final int errorCode) {
+                            public void onAdFailedToLoad(final LoadAdError error) {
                                 if (adListener != null) {
                                     new Thread(
                                             new Runnable() {
                                                 @Override
                                                 public void run() {
                                                     if (adListener != null) {
-                                                        adListener.onAdFailedToLoad(
-                                                                PluginUtils.getErrorReason(
-                                                                        errorCode));
+                                                        adListener.onAdFailedToLoad(error);
                                                     }
                                                 }
                                             })
@@ -195,6 +198,33 @@ public class Interstitial {
      */
     public String getMediationAdapterClassName() {
         return interstitial != null ? interstitial.getMediationAdapterClassName() : null;
+    }
+
+    /**
+     * Returns the request response info.
+     */
+    public ResponseInfo getResponseInfo() {
+        FutureTask<ResponseInfo> task = new FutureTask<>(new Callable<ResponseInfo>() {
+            @Override
+            public ResponseInfo call() {
+                return interstitial.getResponseInfo();
+            }
+        });
+        activity.runOnUiThread(task);
+
+        ResponseInfo result = null;
+        try {
+            result = task.get();
+        } catch (InterruptedException exception) {
+            Log.e(PluginUtils.LOGTAG,
+                    String.format("Unable to check interstitial response info: %s",
+                            exception.getLocalizedMessage()));
+        } catch (ExecutionException exception) {
+            Log.e(PluginUtils.LOGTAG,
+                    String.format("Unable to check interstitial response info: %s",
+                            exception.getLocalizedMessage()));
+        }
+        return result;
     }
 
     /**

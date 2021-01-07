@@ -13,6 +13,9 @@
 // limitations under the License.
 
 using System;
+using UnityEngine;
+using System.Reflection;
+using System.Runtime;
 
 using GoogleMobileAds;
 using GoogleMobileAds.Common;
@@ -38,6 +41,8 @@ namespace GoogleMobileAds.Api
         }
 
         private readonly IMobileAdsClient client = GetMobileAdsClient();
+
+        private static IClientFactory clientFactory;
 
         private static MobileAds instance;
 
@@ -72,6 +77,11 @@ namespace GoogleMobileAds.Api
             MobileAdsEventExecutor.Initialize();
         }
 
+        public static void DisableMediationInitialization()
+        {
+            Instance.client.DisableMediationInitialization();
+        }
+
         public static void SetApplicationMuted(bool muted)
         {
             Instance.client.SetApplicationMuted(muted);
@@ -98,9 +108,25 @@ namespace GoogleMobileAds.Api
             Instance.client.SetiOSAppPauseOnBackground(pause);
         }
 
+        internal static IClientFactory GetClientFactory() {
+          if (clientFactory == null) {
+            String typeName = null;
+            if (Application.platform == RuntimePlatform.IPhonePlayer) {
+              typeName = "GoogleMobileAds.GoogleMobileAdsClientFactory,GoogleMobileAds.iOS";
+            } else if (Application.platform == RuntimePlatform.Android) {
+              typeName = "GoogleMobileAds.GoogleMobileAdsClientFactory,GoogleMobileAds.Android";
+            } else {
+              typeName = "GoogleMobileAds.GoogleMobileAdsClientFactory,GoogleMobileAds.Unity";
+            }
+            Type type = Type.GetType(typeName);
+            clientFactory = (IClientFactory)System.Activator.CreateInstance(type);
+          }
+          return clientFactory;
+        }
+
         private static IMobileAdsClient GetMobileAdsClient()
         {
-            return GoogleMobileAdsClientFactory.MobileAdsInstance();
+            return GetClientFactory().MobileAdsInstance();
         }
     }
 }

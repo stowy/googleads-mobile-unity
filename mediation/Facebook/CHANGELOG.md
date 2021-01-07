@@ -1,5 +1,45 @@
 ## Facebook Unity Mediation Plugin Changelog
 
+#### Version 3.1.0
+- Supports [Facebook Android adapter version 6.2.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#6200).
+- Supports [Facebook iOS adapter version 6.2.0.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-6200).
+
+#### Version 3.0.0
+- Supports [Facebook Android adapter version 6.1.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#6100).
+- Supports [Facebook iOS adapter version 6.0.0.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-6000).
+
+#### Version 2.12.0
+- Supports [Facebook Android adapter version 5.11.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#51100).
+- Supports [Facebook iOS adapter version 5.10.1.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-51010).
+
+#### Version 2.11.1
+- Supports [Facebook Android adapter version 5.10.1.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#51010).
+- Supports [Facebook iOS adapter version 5.10.1.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-51010).
+
+#### Version 2.11.0
+- Supports [Facebook Android adapter version 5.10.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#51000).
+- Supports [Facebook iOS adapter version 5.10.0.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-51000).
+
+#### Version 2.10.0
+- Supports [Facebook Android adapter version 5.9.1.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#5910).
+- Supports [Facebook iOS adapter version 5.9.0.1](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-5901).
+
+#### Version 2.9.2
+- Supports [Facebook Android adapter version 5.9.0.2](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#5902).
+- Supports [Facebook iOS adapter version 5.9.0.1](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-5901).
+
+#### Version 2.9.1
+- Supports [Facebook Android adapter version 5.9.0.1](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#5901).
+- Supports [Facebook iOS adapter version 5.9.0.1](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-5901).
+
+#### Version 2.9.0
+- Supports [Facebook Android adapter version 5.9.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#5900).
+- Supports [Facebook iOS adapter version 5.9.0.0](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-5900).
+
+#### Version 2.8.1
+- Supports [Facebook Android adapter version 5.8.0.1](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#5801).
+- Supports [Facebook iOS adapter version 5.8.0.2](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-5802).
+
 #### Version 2.8.0
 - Supports [Facebook Android adapter version 5.8.0.0](https://github.com/googleads/googleads-mobile-android-mediation/blob/master/ThirdPartyAdapters/facebook/CHANGELOG.md#5800).
 - Supports [Facebook iOS adapter version 5.8.0.1](https://github.com/googleads/googleads-mobile-ios-mediation/blob/master/adapters/Facebook/CHANGELOG.md#version-5801).

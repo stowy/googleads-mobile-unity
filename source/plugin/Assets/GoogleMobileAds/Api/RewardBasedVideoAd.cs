@@ -35,7 +35,7 @@ namespace GoogleMobileAds.Api
         // Creates a Singleton RewardBasedVideoAd.
         private RewardBasedVideoAd()
         {
-            this.client = GoogleMobileAdsClientFactory.BuildRewardBasedVideoAdClient();
+            this.client = MobileAds.GetClientFactory().BuildRewardBasedVideoAdClient();
             client.CreateRewardBasedVideoAd();
 
             this.client.OnAdLoaded += (sender, args) =>
@@ -50,7 +50,11 @@ namespace GoogleMobileAds.Api
             {
                 if (this.OnAdFailedToLoad != null)
                 {
-                    this.OnAdFailedToLoad(this, args);
+                    this.OnAdFailedToLoad(this, new AdFailedToLoadEventArgs()
+                    {
+                        LoadAdError = null,
+                        Message = args.Message
+                    });
                 }
             };
 

@@ -31,6 +31,9 @@ namespace GoogleMobileAds.iOS
             IntPtr mobileAdsClient, MobileAdsClient.GADUInitializationCompleteCallback callback);
 
         [DllImport("__Internal")]
+        internal static extern void GADUDisableMediationInitialization();
+
+        [DllImport("__Internal")]
         internal static extern IntPtr GADUGetInitDescription(IntPtr status, string className);
 
         [DllImport("__Internal")]
@@ -109,9 +112,6 @@ namespace GoogleMobileAds.iOS
 
         [DllImport("__Internal")]
         internal static extern void GADUSetRequestConfiguration(IntPtr requestConfiguration);
-
-        [DllImport("__Internal")]
-        internal static extern IntPtr GADUGetRequestConfiguration();
 
         [DllImport("__Internal")]
         internal static extern void GADUSetRequestConfigurationTestDeviceIdentifiers(IntPtr requestConfiguration, string[] testDeviceIDs, int testDeviceIDLength);
@@ -219,6 +219,36 @@ namespace GoogleMobileAds.iOS
 
         [DllImport("__Internal")]
         internal static extern IntPtr GADUMediationAdapterClassNameForBannerView(IntPtr bannerView);
+
+        [DllImport("__Internal")]
+        internal static extern IntPtr GADUGetResponseInfo(IntPtr adFormat);
+
+        [DllImport("__Internal")]
+        internal static extern string GADUResponseInfoMediationAdapterClassName(IntPtr responseInfo);
+
+        [DllImport("__Internal")]
+        internal static extern string GADUResponseInfoResponseId(IntPtr responseInfo);
+
+        [DllImport("__Internal")]
+        internal static extern string GADUGetResponseInfoDescription(IntPtr responseInfo);
+
+        [DllImport("__Internal")]
+        internal static extern int GADUGetAdErrorCode(IntPtr error);
+
+        [DllImport("__Internal")]
+        internal static extern string GADUGetAdErrorDomain(IntPtr error);
+
+        [DllImport("__Internal")]
+        internal static extern string GADUGetAdErrorMessage(IntPtr error);
+
+        [DllImport("__Internal")]
+        internal static extern IntPtr GADUGetAdErrorUnderLyingError(IntPtr error);
+
+        [DllImport("__Internal")]
+        internal static extern IntPtr GADUGetAdErrorResponseInfo(IntPtr error);
+
+        [DllImport("__Internal")]
+        internal static extern string GADUGetAdErrorDescription(IntPtr error);
 
         #endregion
 
@@ -346,67 +376,37 @@ namespace GoogleMobileAds.iOS
 
         #endregion
 
-        #region AdLoader externs
+        #region RewardedInterstitialAd externs
 
         [DllImport("__Internal")]
-        internal static extern IntPtr GADUCreateAdLoader(
-            IntPtr adLoader,
-            string adUnitId,
-            string[] templateIds,
-            int templateIdsCount,
-            ref NativeAdTypes types,
-            bool returnUrlsForImageAssets);
+        internal static extern IntPtr GADUCreateRewardedInterstitialAd(IntPtr rewardedInterstitialAd);
 
         [DllImport("__Internal")]
-        internal static extern void GADURequestNativeAd(IntPtr adLoader, IntPtr request);
+        internal static extern IntPtr GADULoadRewardedInterstitialAd(IntPtr rewardedInterstitialAd, string adUnitID, IntPtr request);
 
         [DllImport("__Internal")]
-        internal static extern void GADUSetAdLoaderCallbacks(
-            IntPtr adLoader,
-            AdLoaderClient.GADUAdLoaderDidReceiveNativeCustomTemplateAdCallback adReceivedCallback,
-            AdLoaderClient.GADUAdLoaderDidFailToReceiveAdWithErrorCallback adFailedCallback);
-
-        #endregion
-
-        #region NativeCustomTemplateAd externs
+        internal static extern void GADUShowRewardedInterstitialAd(IntPtr rewardedInterstitialAd);
 
         [DllImport("__Internal")]
-        internal static extern string GADUNativeCustomTemplateAdTemplateID(
-            IntPtr nativeCustomTemplateAd);
+        internal static extern void GADUSetRewardedInterstitialAdCallbacks(
+            IntPtr rewardedInterstitialAd,
+            RewardedInterstitialAdClient.GADURewardedInterstitialAdLoadedCallback adLoadedCallback,
+            RewardedInterstitialAdClient.GADURewardedInterstitialAdFailedToLoadCallback adFailedToLoadCallback,
+            RewardedInterstitialAdClient.GADUUserEarnedRewardCallback adDidEarnRewardCallback,
+            RewardedInterstitialAdClient.GADURewardedInterstitialAdPaidEventCallback paidEventCallback,
+            RewardedInterstitialAdClient.GADUFailedToPresentFullScreenContentCallback adFailToPresentFullScreenContentCallback,
+            RewardedInterstitialAdClient.GADUDidPresentFullScreenContentCallback adDidPresentFullScreenContentCallback,
+            RewardedInterstitialAdClient.GADUDidDismissFullScreenContentCallback adDidDismissFullScreenContentCallback
+        );
 
         [DllImport("__Internal")]
-        internal static extern string GADUNativeCustomTemplateAdImageAsBytesForKey(
-            IntPtr nativeCustomTemplateAd, string key);
+        internal static extern void GADURewardedInterstitialAdSetServerSideVerificationOptions(IntPtr rewardedAd, IntPtr options);
 
         [DllImport("__Internal")]
-        internal static extern string GADUNativeCustomTemplateAdStringForKey(
-            IntPtr nativeCustomTemplateAd, string key);
+        internal static extern string GADURewardedInterstitialAdGetRewardType(IntPtr rewardedInterstitialAd);
 
         [DllImport("__Internal")]
-        internal static extern void GADUNativeCustomTemplateAdRecordImpression(
-            IntPtr nativeCustomTemplateAd);
-
-        [DllImport("__Internal")]
-        internal static extern void GADUNativeCustomTemplateAdPerformClickOnAssetWithKey(
-            IntPtr nativeCustomTemplateAd, string assetName, bool customClickAction);
-
-        [DllImport("__Internal")]
-        internal static extern IntPtr GADUNativeCustomTemplateAdAvailableAssetKeys(
-            IntPtr nativeCustomTemplateAd);
-
-        [DllImport("__Internal")]
-        internal static extern int GADUNativeCustomTemplateAdNumberOfAvailableAssetKeys(
-            IntPtr nativeCustomTemplateAd);
-
-        [DllImport("__Internal")]
-        internal static extern void GADUSetNativeCustomTemplateAdUnityClient(
-            IntPtr nativeCustomTemplateAd, IntPtr nativeCustomTemplateClient);
-
-        [DllImport("__Internal")]
-        internal static extern void GADUSetNativeCustomTemplateAdCallbacks(
-            IntPtr nativeCustomTemplateAd,
-            CustomNativeTemplateClient.GADUNativeCustomTemplateDidReceiveClick
-                    adClickedCallback);
+        internal static extern double GADURewardedInterstitialAdGetRewardAmount(IntPtr rewardedInterstitialAd);
 
         #endregion
     }

@@ -33,7 +33,7 @@ namespace GoogleMobileAds.iOS
         internal delegate void GADUAdViewDidReceiveAdCallback(IntPtr bannerClient);
 
         internal delegate void GADUAdViewDidFailToReceiveAdWithErrorCallback(
-                IntPtr bannerClient, string error);
+                IntPtr bannerClient, IntPtr error);
 
         internal delegate void GADUAdViewWillPresentScreenCallback(IntPtr bannerClient);
 
@@ -48,7 +48,7 @@ namespace GoogleMobileAds.iOS
 
         public event EventHandler<EventArgs> OnAdLoaded;
 
-        public event EventHandler<AdFailedToLoadEventArgs> OnAdFailedToLoad;
+        public event EventHandler<LoadAdErrorClientEventArgs> OnAdFailedToLoad;
 
         public event EventHandler<EventArgs> OnAdOpening;
 
@@ -81,26 +81,27 @@ namespace GoogleMobileAds.iOS
         {
             this.bannerClientPtr = (IntPtr)GCHandle.Alloc(this);
 
-            switch (adSize.AdType) {
-              case AdSize.Type.SmartBanner:
-                  this.BannerViewPtr = Externs.GADUCreateSmartBannerView(
-                          this.bannerClientPtr, adUnitId, (int)position);
-                  break;
-              case AdSize.Type.AnchoredAdaptive:
-                  this.BannerViewPtr = Externs.GADUCreateAnchoredAdaptiveBannerView(
-                          this.bannerClientPtr,
-                          adUnitId,
-                          adSize.Width,
-                          (int)adSize.Orientation,
-                          (int)position);
-                  break;
-              case AdSize.Type.Standard:
-                  this.BannerViewPtr = Externs.GADUCreateBannerView(
-                          this.bannerClientPtr, adUnitId, adSize.Width, adSize.Height, (int)position);
-                  break;
-              default:
-                  throw new ArgumentException("Invalid AdSize.Type provided.");
-          }
+            switch (adSize.AdType)
+            {
+                case AdSize.Type.SmartBanner:
+                    this.BannerViewPtr = Externs.GADUCreateSmartBannerView(
+                            this.bannerClientPtr, adUnitId, (int)position);
+                    break;
+                case AdSize.Type.AnchoredAdaptive:
+                    this.BannerViewPtr = Externs.GADUCreateAnchoredAdaptiveBannerView(
+                            this.bannerClientPtr,
+                            adUnitId,
+                            adSize.Width,
+                            (int)adSize.Orientation,
+                            (int)position);
+                    break;
+                case AdSize.Type.Standard:
+                    this.BannerViewPtr = Externs.GADUCreateBannerView(
+                            this.bannerClientPtr, adUnitId, adSize.Width, adSize.Height, (int)position);
+                    break;
+                default:
+                    throw new ArgumentException("Invalid AdSize.Type provided.");
+            }
 
             Externs.GADUSetBannerCallbacks(
                     this.BannerViewPtr,
@@ -118,7 +119,8 @@ namespace GoogleMobileAds.iOS
 
             this.bannerClientPtr = (IntPtr)GCHandle.Alloc(this);
 
-            switch (adSize.AdType) {
+            switch (adSize.AdType)
+            {
                 case AdSize.Type.SmartBanner:
                     this.BannerViewPtr = Externs.GADUCreateSmartBannerViewWithCustomPosition(
                     this.bannerClientPtr,
@@ -216,6 +218,11 @@ namespace GoogleMobileAds.iOS
             return Utils.PtrToString(Externs.GADUMediationAdapterClassNameForBannerView(this.BannerViewPtr));
         }
 
+        public IResponseInfoClient GetResponseInfoClient()
+        {
+            return new ResponseInfoClient(ResponseInfoClientType.AdLoaded, this.BannerViewPtr);
+        }
+
         public void Dispose()
         {
             this.DestroyBannerView();
@@ -243,14 +250,15 @@ namespace GoogleMobileAds.iOS
 
         [MonoPInvokeCallback(typeof(GADUAdViewDidFailToReceiveAdWithErrorCallback))]
         private static void AdViewDidFailToReceiveAdWithErrorCallback(
-                IntPtr bannerClient, string error)
+                IntPtr bannerClient, IntPtr error)
         {
             BannerClient client = IntPtrToBannerClient(bannerClient);
             if (client.OnAdFailedToLoad != null)
             {
-                AdFailedToLoadEventArgs args = new AdFailedToLoadEventArgs()
+                LoadAdErrorClientEventArgs args = new LoadAdErrorClientEventArgs()
                 {
-                    Message = error
+                    LoadAdErrorClient = new LoadAdErrorClient(error),
+                    Message = Externs.GADUGetAdErrorMessage(error)
                 };
                 client.OnAdFailedToLoad(client, args);
             }
@@ -299,7 +307,8 @@ namespace GoogleMobileAds.iOS
                     Value = value,
                     CurrencyCode = currencyCode
                 };
-                AdValueEventArgs args = new AdValueEventArgs() {
+                AdValueEventArgs args = new AdValueEventArgs()
+                {
                     AdValue = adValue
                 };
 
@@ -317,5 +326,3 @@ namespace GoogleMobileAds.iOS
     }
 }
 #endif
-
-

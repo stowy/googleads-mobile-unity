@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+
 using UnityEngine;
 
 using GoogleMobileAds.Api;
@@ -25,7 +26,7 @@ namespace GoogleMobileAds.Android
         private AndroidJavaObject androidRewardBasedVideo;
 
         public event EventHandler<EventArgs> OnAdLoaded = delegate { };
-        public event EventHandler<AdFailedToLoadEventArgs> OnAdFailedToLoad = delegate { };
+        public event EventHandler<LoadAdErrorClientEventArgs> OnAdFailedToLoad = delegate { };
         public event EventHandler<EventArgs> OnAdOpening = delegate { };
         public event EventHandler<EventArgs> OnAdStarted = delegate { };
         public event EventHandler<EventArgs> OnAdClosed = delegate { };
@@ -33,7 +34,7 @@ namespace GoogleMobileAds.Android
         public event EventHandler<EventArgs> OnAdLeavingApplication = delegate { };
         public event EventHandler<EventArgs> OnAdCompleted = delegate { };
 
-        public RewardBasedVideoAdClient(): base(Utils.UnityRewardBasedVideoAdListenerClassName)
+        public RewardBasedVideoAdClient() : base(Utils.UnityRewardBasedVideoAdListenerClassName)
         {
             AndroidJavaClass playerClass = new AndroidJavaClass(Utils.UnityActivityClassName);
             AndroidJavaObject activity =
@@ -96,8 +97,9 @@ namespace GoogleMobileAds.Android
         {
             if (this.OnAdFailedToLoad != null)
             {
-                AdFailedToLoadEventArgs args = new AdFailedToLoadEventArgs()
+                LoadAdErrorClientEventArgs args = new LoadAdErrorClientEventArgs()
                 {
+                    LoadAdErrorClient = null,
                     Message = errorReason
                 };
                 this.OnAdFailedToLoad(this, args);
@@ -160,5 +162,3 @@ namespace GoogleMobileAds.Android
         #endregion
     }
 }
-
-

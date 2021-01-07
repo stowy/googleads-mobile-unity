@@ -13,8 +13,6 @@
 // limitations under the License.
 
 using System;
-
-using GoogleMobileAds;
 using GoogleMobileAds.Common;
 
 namespace GoogleMobileAds.Api
@@ -25,7 +23,7 @@ namespace GoogleMobileAds.Api
 
         public RewardedAd(string adUnitId)
         {
-            this.client = GoogleMobileAdsClientFactory.BuildRewardedAdClient();
+            this.client = MobileAds.GetClientFactory().BuildRewardedAdClient();
             client.CreateRewardedAd(adUnitId);
 
             this.client.OnAdLoaded += (sender, args) =>
@@ -40,7 +38,12 @@ namespace GoogleMobileAds.Api
             {
                 if (this.OnAdFailedToLoad != null)
                 {
-                    this.OnAdFailedToLoad(this, args);
+                    LoadAdError loadAdError = new LoadAdError(args.LoadAdErrorClient);
+                    this.OnAdFailedToLoad(this, new AdFailedToLoadEventArgs()
+                    {
+                        LoadAdError = loadAdError,
+                        Message = loadAdError.GetMessage()
+                    });
                 }
             };
 
@@ -48,7 +51,13 @@ namespace GoogleMobileAds.Api
             {
                 if (this.OnAdFailedToShow != null)
                 {
-                    this.OnAdFailedToShow(this, args);
+                    AdError adError = new AdError(args.AdErrorClient);
+
+                    this.OnAdFailedToShow(this, new AdErrorEventArgs()
+                    {
+                        AdError = adError,
+                        Message = adError.GetMessage()
+                    });
                 }
             };
 
@@ -89,7 +98,7 @@ namespace GoogleMobileAds.Api
         // These are the ad callback events that can be hooked into.
         public event EventHandler<EventArgs> OnAdLoaded;
 
-        public event EventHandler<AdErrorEventArgs> OnAdFailedToLoad;
+        public event EventHandler<AdFailedToLoadEventArgs> OnAdFailedToLoad;
 
         public event EventHandler<AdErrorEventArgs> OnAdFailedToShow;
 
@@ -129,16 +138,25 @@ namespace GoogleMobileAds.Api
         // Returns the reward item for the loaded rewarded ad.
         public Reward GetRewardItem()
         {
-            if (client.IsLoaded()) {
-              return client.GetRewardItem();
+            if (client.IsLoaded())
+            {
+                return client.GetRewardItem();
             }
             return null;
         }
 
         // Returns the mediation adapter class name.
+        [Obsolete("MediationAdapterClassName() is deprecated, use GetResponseInfo.MediationAdapterClassName() instead.")]
         public string MediationAdapterClassName()
         {
             return this.client.MediationAdapterClassName();
         }
+
+        // Returns ad request response info.
+        public ResponseInfo GetResponseInfo()
+        {
+            return new ResponseInfo(this.client.GetResponseInfoClient());
+        }
+
     }
 }

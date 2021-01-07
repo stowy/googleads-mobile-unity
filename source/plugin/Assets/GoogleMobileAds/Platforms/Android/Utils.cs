@@ -69,8 +69,6 @@ namespace GoogleMobileAds.Android
 
         public const string UnityRewardedAdClassName = "com.google.unity.ads.UnityRewardedAd";
 
-        public const string NativeAdLoaderClassName = "com.google.unity.ads.NativeAdLoader";
-
         public const string UnityAdListenerClassName = "com.google.unity.ads.UnityAdListener";
 
         public const string UnityRewardBasedVideoAdListenerClassName =
@@ -91,6 +89,9 @@ namespace GoogleMobileAds.Android
         public const string UnityPaidEventListenerClassName =
             "com.google.unity.ads.UnityPaidEventListener";
 
+        public const string UnityRewardedInterstitialAdClassName = "com.google.unity.ads.UnityRewardedInterstitialAd";
+
+        public const string UnityRewardedInterstitialAdCallbackClassName = "com.google.unity.ads.UnityRewardedInterstitialAdCallback";
 
         public const string PluginUtilsClassName = "com.google.unity.ads.PluginUtils";
 
@@ -223,6 +224,9 @@ namespace GoogleMobileAds.Android
             }
 
             bundle.Call("putString", "is_unity", "1");
+
+            // Makes ads that contain WebP ad assets ineligible.
+            bundle.Call("putString", "adw", "true");
 
             AndroidJavaObject extras = new AndroidJavaObject(AdMobExtrasClassName, bundle);
             adRequestBuilder.Call<AndroidJavaObject>("addNetworkExtras", extras);
